@@ -1,0 +1,28 @@
+{
+  "name": "webpack-basic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn webpack-dev-server -- --env.env=dev",
+    "dev:analyse": "yarn dev -- --env.addons=bundleanalyse",
+    "build": "yarn webpack -- --env.env=prod",
+    "build:analyse": "yarn build -- --env.addons=bundleanalyse",
+    "build:buddy": "yarn build -- --env.addons=bundlebuddy",
+    "debug": "node --inspect --debug-brk ./node_modules/webpack/bin/webpack.js",
+    "webpack": "node ./node_modules/webpack/bin/webpack.js",
+    "webpack-dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port=9000 --hot"
+  },
+  "devDependencies": {
+    "bundle-buddy-webpack-plugin": "^0.3.0",
+    "chalk": "^2.0.1",
+    "compression-webpack-plugin": "^1.0.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.4.1",
+    "webpack-bundle-analyzer": "^2.8.3",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-merge": "^4.1.0"
+  }
+}
