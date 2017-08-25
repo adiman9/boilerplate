@@ -1,0 +1,33 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.14.1",
+    "express-mysql-session": "^1.2.1",
+    "express-session": "^1.15.4",
+    "js-yaml": "^3.9.1",
+    "mysql": "^2.13.0",
+    "pm2": "^2.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development node_modules/nodemon/bin/nodemon.js index.js",
+    "prod": "NODE_ENV=production node_modules/nodemon/bin/nodemon.js index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}

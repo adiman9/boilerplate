@@ -1,0 +1,18 @@
+useDb: false
+useSSL: false
+privateKey: ''
+sslCert: ''
+session:
+  secret: 'octoturtlebeans'
+  cookie:
+    maxAge: 2419200000
+  resave: false
+  saveUninitialized: true
+db:
+  connectionLimit: 100
+  multipleStatements: true
+  host: 'localhost'
+  user: ''
+  password: ''
+  database: ''
+  debug: false
