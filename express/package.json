@@ -9,8 +9,10 @@
     "express-mysql-session": "^1.2.1",
     "express-session": "^1.15.4",
     "js-yaml": "^3.9.1",
+    "morgan": "^1.8.2",
     "mysql": "^2.13.0",
-    "pm2": "^2.4.1"
+    "pm2": "^2.4.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
