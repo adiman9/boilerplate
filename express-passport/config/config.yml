@@ -1,0 +1,18 @@
+useDb: true
+useSSL: false
+privateKey: ''
+sslCert: ''
+session:
+  secret: 'octoturtlebeans'
+  cookie:
+    maxAge: 2419200000
+  resave: false
+  saveUninitialized: true
+db:
+  connectionLimit: 100
+  multipleStatements: true
+  host: 'localhost'
+  user: 'cryptomonitor'
+  password: '{hn^45+{NAf4)M/'
+  database: 'cryptomonitor'
+  debug: false

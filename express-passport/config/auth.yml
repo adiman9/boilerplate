@@ -1,0 +1,16 @@
+facebook:
+  clientID: "1200707206709194"
+  clientSecret: "9f682a8458b81f5303dbd0d5bfdf4ff5"
+  callbackURL: "http://localhost:8080/v0/auth/facebook/callback"
+google:
+  clientID: "945246952572-qgbcmtie600prdhj67qprni3d5b69hjf.apps.googleusercontent.com"
+  clientSecret: "22BPAmA9CtTvXx5X3sIbLRcn"
+  callbackURL: "http://localhost:8080/v0/auth/google/callback"
+twitter:
+  consumerKey: "mBut0QLSTi1UUj5W7Ymoh5A9n"
+  consumerSecret: "a5vVLydek3X8vhRhCO3rHMvFAcTF98jSbiZ8BVQoEf8KpIMhVd"
+  callbackURL: "http://localhost:8080/v0/auth/twitter/callback"
+github:
+  clientID: "14ee22399419cbbb9235"
+  clientSecret: "c6bf068ed4c10fc98f28ff7ef98a93712d3aa188"
+  callbackURL: "http://localhost:8080/v0/auth/github/callback"
