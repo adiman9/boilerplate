@@ -9,7 +9,7 @@ async function migrate() {
   let conn = connWithNoDb();
   conn.connect();
 
-  await manualDbQuery(conn, `CREATE DATABASE IF NOT EXISTS {config.db.database}; use {config.db.database};`);
+  await manualDbQuery(conn, `CREATE DATABASE IF NOT EXISTS ${config.db.database}; use ${config.db.database};`);
 
   let rows = await manualDbQuery(conn, 'SHOW TABLES');
 
