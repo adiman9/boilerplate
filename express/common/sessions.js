@@ -10,11 +10,11 @@ module.exports = function(app) {
 
     // Session handling
     let mySqlOptions = {
-      host: 'localhost',
+      host: config.db.host,
       port: '3306',
-      user: 'htcode',
-      password: 'thisturtlecodes',
-      database: 'hungryturtlecode'
+      user: config.db.user,
+      password: config.db.password,
+      database: config.db.database
     }
 
     var sessionStore = new MySqlStore(mySqlOptions);
