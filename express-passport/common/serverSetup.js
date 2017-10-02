@@ -3,6 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const yaml = require('js-yaml');
 let config = require('../config/')('config');
+const logger = require('./logger');
 
 module.exports = function(app) {
   var server;
@@ -19,24 +20,35 @@ module.exports = function(app) {
 
     // SSL server
     https.createServer(options, app).listen(443, err => {
-      if(err) console.error(err);
+      if(err) logger.error(err);
       // get uid of the user who envoked the script
       var uid = parseInt(process.env.SUDO_UID);
 
       // revert node's uid back to the orignal user so it no longer has sudo priviledges
       if(uid) process.setuid(uid);
 
-      console.log('running secure server on port 443');
+      logger.info('running secure server on port 443');
     });
     // Redirect to SSL
     http.createServer((req, res) => {
-      console.log('REDIRECTING ', req.url);
+      logger.info('REDIRECTING ', req.url);
       res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url  });
       res.end();
-    }).listen(80, () => console.log('listening on port 80'));
+    }).listen(80, () => logger.info('listening on port 80 to redirect to ssl'));
 
+  } else if(process.env.NODE_ENV === 'production'){
+    http.createServer(app).listen(80, err => {
+      if(err) logger.error(err);
+      // get uid of the user who envoked the script
+      var uid = parseInt(process.env.SUDO_UID);
+
+      // revert node's uid back to the orignal user so it no longer has sudo priviledges
+      if(uid) process.setuid(uid);
+
+      logger.info('Set up server on port 80');
+    });
   } else {
     // Dev server
-    http.createServer(app).listen(8080, () => console.log('listening on port 8080'));
+    http.createServer(app).listen(8080, () => logger.info('listening on port 8080'));
   }
 }
