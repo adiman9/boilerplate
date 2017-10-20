@@ -11,6 +11,11 @@ const config = {
   module: {
     rules: [
       {
+        use: 'babel-loader',
+        test: /\.js$/,
+        exclude: /node_modules/
+      },
+      {
         test: /\.(jpe?g|png|gif)/,
         use: [
           {
@@ -19,7 +24,8 @@ const config = {
               limit: 12000
             }
           }
-        ]
+        ],
+        exclude: /node_modules/
       }
     ]
   },
