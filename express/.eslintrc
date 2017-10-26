@@ -1,0 +1,22 @@
+{
+ "extends": ["airbnb", "node"],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "plugins": [],
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "local",
+        "args": "none"
+      }
+    ]
+  }
+}
