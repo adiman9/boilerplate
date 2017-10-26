@@ -12,12 +12,18 @@
     "debug": "node --inspect --debug-brk ./node_modules/webpack/bin/webpack.js",
     "webpack": "node ./node_modules/webpack/bin/webpack.js",
     "webpack-dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port=9001 --hot",
-    "webpack-defaults": "webpack-defaults"
+    "webpack-defaults": "webpack-defaults",
+    "lint": "eslint src"
   },
   "devDependencies": {
     "bundle-buddy-webpack-plugin": "^0.3.0",
     "chalk": "^2.0.1",
     "compression-webpack-plugin": "^1.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^2.30.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
