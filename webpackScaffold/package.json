@@ -1,0 +1,16 @@
+{
+  "name": "webpackScaffold",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Adrian Henry",
+  "license": "MIT",
+  "bin": {
+    "scaf": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.11.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^4.0.2"
+  }
+}
