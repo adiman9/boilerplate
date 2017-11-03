@@ -6,8 +6,8 @@
     "build:analyse": "yarn build -- --env.addons=bundleanalyse",
     "build:buddy": "yarn build -- --env.addons=bundlebuddy",
     "debug": "node --inspect --debug-brk ./node_modules/webpack/bin/webpack.js",
-    "webpack": "node ./node_modules/webpack/bin/webpack.js",
-    "webpack-dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port=9001 --hot",
+    "webpack": "node ./node_modules/webpack/bin/webpack.js  --env.addons=react --env.addons=typescript",
+    "webpack-dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port=9001 --hot --env.addons=react --env.addons=typescript",
     "webpack-defaults": "webpack-defaults",
     "lint": "eslint src"
   },
