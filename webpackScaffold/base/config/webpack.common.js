@@ -8,6 +8,9 @@ const config = {
     filename: "bundle.js",
     path: commonPaths.outputPath
   },
+  resolve: {
+    extensions: [".js"]
+  },
   module: {
     rules: [
       {
