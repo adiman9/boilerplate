@@ -32,6 +32,9 @@ const config = {
       }
     ]
   },
+  resolve: {
+    extensions: [".js"]
+  },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin()
