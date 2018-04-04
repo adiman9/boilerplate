@@ -48,6 +48,7 @@ app.use(async (req, res, next) => {
 app.use(require('./routes/'));
 
 app.use((err, req, res, next) => {
+  logger.error(err);
   res
     .status(500)
     .send('Access Denied');

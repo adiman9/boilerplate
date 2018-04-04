@@ -5,6 +5,9 @@ var passport = require('passport');
 var GhStrategy = require('passport-github2').Strategy;
 var config = require('../config/')('auth')
 var userModel = require('../model/user');
+const {
+  authCallback
+} = require('./utils');
 
 // Setup passport Facebook strategy
 passport.use(new GhStrategy({
@@ -24,16 +27,7 @@ passport.use(new GhStrategy({
 router.get('/', passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 // /auth/github/callback
-router.get('/callback', 
-  passport.authenticate(
-    'github', { 
-      failureRedirect: '/'
-    }
-  ),
-  (req, res) => {
-    res.redirect('/profile');
-  }
-);
+router.get('/callback', authCallback('github'));
 
 // Return router
 module.exports = router;

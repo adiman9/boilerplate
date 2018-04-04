@@ -5,6 +5,9 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('../config/')('auth')
 var userModel = require('../model/user');
+const {
+  authCallback
+} = require('./utils');
 
 // Setup passport Facebook strategy
 passport.use(new GoogleStrategy({
@@ -21,8 +24,8 @@ passport.use(new GoogleStrategy({
 /* ROUTES */
 
 // /auth/google
-router.get('/', 
-  passport.authenticate('google', { 
+router.get('/',
+  passport.authenticate('google', {
     scope: [
       'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile'
@@ -31,16 +34,7 @@ router.get('/',
 );
 
 // /auth/google/callback
-router.get('/callback', 
-  passport.authenticate(
-    'google', { 
-      failureRedirect: '/'
-    }
-  ),
-  (req, res) => {
-    res.redirect('/profile');
-  }
-);
+router.get('/callback', authCallback('google'));
 
 // Return router
 module.exports = router;

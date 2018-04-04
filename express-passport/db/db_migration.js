@@ -75,4 +75,41 @@ const SCHEMA_MIGRATIONS = [
       PRIMARY KEY (user_id, alias_id)
     )
   `),
+  sql(`
+    CREATE TABLE Admins(
+      user_id BINARY(16) NOT NULL UNIQUE,
+      is_admin TINYINT UNSIGNED NOT NULL DEFAULT 0,
+      PRIMARY KEY (user_id)
+    )
+  `),
+  sql(`
+    CREATE TABLE LocalAuth(
+      user_id BINARY(16) NOT NULL,
+      password BINARY(60) NOT NULL,
+      PRIMARY KEY (user_id)
+    )
+  `),
+  sql(`
+    CREATE TABLE PasswordReset(
+      token BINARY(40) NOT NULL UNIQUE,
+      user_id BINARY(16) NOT NULL,
+      expires BIGINT UNSIGNED NOT NULL,
+      used TINYINT UNSIGNED NOT NULL DEFAULT 0,
+      PRIMARY KEY (token)
+    )
+  `),
+  sql(`
+    CREATE TABLE Analytics(
+      id BINARY(16) NOT NULL UNIQUE,
+      user_id BINARY(16) NOT NULL,
+      event_time BIGINT UNSIGNED NOT NULL,
+      location varchar(100) NOT NULL,
+      event varchar(20) NOT NULL,
+      value varchar(100) NOT NULL,
+      PRIMARY KEY (id)
+    )
+  `),
+  sql(`
+    CREATE INDEX analytics_user_id_idx ON Analytics (user_id);
+  `),
 ]

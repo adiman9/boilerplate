@@ -5,6 +5,9 @@ var passport = require('passport');
 var TwStrategy = require('passport-twitter').Strategy;
 var config = require('../config/')('auth')
 var userModel = require('../model/user');
+const {
+  authCallback
+} = require('./utils');
 
 // Setup passport Facebook strategy
 passport.use(new TwStrategy({
@@ -25,14 +28,7 @@ passport.use(new TwStrategy({
 router.get('/', passport.authenticate('twitter'));
 
 // /auth/twitter/callback
-router.get('/callback', 
-  passport.authenticate(
-    'twitter', { 
-      successRedirect: '/profile',
-      failureRedirect: '/'
-    }
-  )
-);
+router.get('/callback', authCallback('twitter'));
 
 // Return router
 module.exports = router;

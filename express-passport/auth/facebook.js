@@ -5,8 +5,10 @@ var passport = require('passport');
 var FbStrategy = require('passport-facebook').Strategy;
 var config = require('../config/')('auth')
 var userModel = require('../model/user');
-const logger = require('../common/logger');
 // TODO add logging to files Sat 30 Sep 13:49:25 2017
+const {
+  authCallback
+} = require('./utils');
 
 // Setup passport Facebook strategy
 passport.use(new FbStrategy({
@@ -28,14 +30,7 @@ passport.use(new FbStrategy({
 router.get('/', passport.authenticate('facebook'));
 
 // /auth/facebook/callback
-router.get('/callback', 
-  passport.authenticate(
-    'facebook', { 
-      successRedirect: '/profile',
-      failureRedirect: '/'
-    }
-  )
-);
+router.get('/callback', authCallback('facebook'));
 
 // Return router
 module.exports = router;
