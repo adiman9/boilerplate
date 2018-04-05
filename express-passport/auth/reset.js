@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('../../model/user');
-const emailController = require('../../controllers/email');
+const userModel = require('../model/user');
+const emailController = require('../controllers/email');
 
 // /auth/reset
 router.get('/:token', checkResetToken);

@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-const userModel = require('../../model/user');
+const userModel = require('../model/user');
 const {
   authCallback
 } = require('./utils');

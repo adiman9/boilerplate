@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('../../model/user');
-const analyticsModel = require('../../model/analytics');
+const userModel = require('../model/user');
+const analyticsModel = require('../model/analytics');
 
 // /auth/register
 router.post('/', async (req, res, next) => {

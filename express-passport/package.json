@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.14.1",
     "express-handlebars": "^3.0.0",
@@ -19,6 +20,7 @@
     "passport-facebook": "^2.1.1",
     "passport-github2": "^0.1.11",
     "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "pm2": "^2.4.1",
     "sendgrid": "^5.2.3",
