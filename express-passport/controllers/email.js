@@ -1,5 +1,5 @@
 const sg = require('sendgrid')
-  ('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');
+  ('**INSERT SENDGRID KEY**');
 const helper = require('sendgrid').mail;
 const fs = require('fs');
 const handlebars = require('handlebars');
@@ -16,7 +16,7 @@ module.exports = {
 // TODO pull the key from config Fri 28 Jul 14:27:23 2017;
 const options = {
   auth: {
-    api_key: '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'
+    api_key: '**INSERT SENDGRID KEY**'
   }
 }
 
