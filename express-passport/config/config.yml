@@ -3,7 +3,7 @@ useSSL: false
 privateKey: ''
 sslCert: ''
 session:
-  secret: 'octoturtlebeans'
+  secret: '**INSERT SESSION SECRET**'
   cookie:
     maxAge: 2419200000
   resave: false
@@ -12,7 +12,7 @@ db:
   connectionLimit: 100
   multipleStatements: true
   host: 'localhost'
-  user: 'cryptomonitor'
-  password: '{hn^45+{NAf4)M/'
-  database: 'cryptomonitor'
+  user: '**INSERT DB USER**'
+  password: '**INSERT DB PASS**'
+  database: '** INSERT DB NAME**'
   debug: false
