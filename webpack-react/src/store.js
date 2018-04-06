@@ -4,19 +4,17 @@ import { createLogger  } from 'redux-logger';
 import rootReducer from './rootReducer';
 
 // Custom middleware
-import Home from './Containers/Home';
-import Miner from './Containers/Miner';
+import Home from './modules/Home';
 
 const logger = createLogger();
 
 const store = createStore(
-  rootReducer, 
+  rootReducer,
   {},
   applyMiddleware(
     thunk,
     logger,
     Home.middleware,
-    Miner.middleware
   )
 );
 

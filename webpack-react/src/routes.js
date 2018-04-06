@@ -4,8 +4,7 @@ import {
     Route,
 } from 'react-router-dom';
 
-import HomeModule from './Containers/Home';
-import MinerModule from './Containers/Miner';
+import HomeModule from './modules/Home';
 
 class Routes extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class Routes extends Component {
       <Router basename="/">
         <div>
           <Route exact path="/" component={HomeModule.container}/>
-          <Route path="/miner" component={MinerModule.container}/>
         </div>
       </Router>
     );
