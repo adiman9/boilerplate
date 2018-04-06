@@ -1,7 +1,7 @@
 import { combineReducers  } from 'redux';
 
 // reducers
-import Home from './Containers/Home';
+import Home from './modules/Home';
 
 const rootReducer = combineReducers({
   [Home.constants.NAME]: Home.reducer,

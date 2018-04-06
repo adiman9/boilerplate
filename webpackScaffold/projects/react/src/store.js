@@ -4,7 +4,7 @@ import { createLogger  } from 'redux-logger';
 import rootReducer from './rootReducer';
 
 // Custom middleware
-import Home from './Containers/Home';
+import Home from './modules/Home';
 
 const logger = createLogger();
 

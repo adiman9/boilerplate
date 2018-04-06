@@ -4,7 +4,7 @@ import {
     Route,
 } from 'react-router-dom';
 
-import HomeModule from './Containers/Home';
+import HomeModule from './modules/Home';
 
 class Routes extends Component {
   constructor(props) {
