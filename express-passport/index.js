@@ -5,12 +5,14 @@ var logger = require('./common/logger');
 var passport = require('passport');
 require('./auth/passportInit');
 const userModel = require('./model/user');
+const common = require('./common/index.js');
 
 var serverSetup = require('./common/serverSetup');
 
 var app = express();
 
 /* APP SETUP */
+app.use(common.setHeaders);
 app.use(bodyParser.json({
   limit: '10mb'
 }));

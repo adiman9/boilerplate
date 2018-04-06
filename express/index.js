@@ -1,12 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('./common/logger');
+const common = require('./common/index.js');
 
 var serverSetup = require('./common/serverSetup');
 
 var app = express();
 
 /* APP SETUP */
+app.use(common.setHeaders);
 app.use(bodyParser.json({
   limit: '10mb'
 }));
