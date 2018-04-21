@@ -8,14 +8,16 @@ import Home from './modules/Home';
 
 const logger = createLogger();
 
+const middleware = [
+  thunk,
+  !PRODUCTION && logger,
+  Home.middleware,
+].filter(Boolean);
+
 const store = createStore(
   rootReducer,
   {},
-  applyMiddleware(
-    thunk,
-    logger,
-    Home.middleware,
-  )
+  applyMiddleware(...middleware)
 );
 
 export default store;
