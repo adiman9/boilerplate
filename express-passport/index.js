@@ -6,12 +6,16 @@ var passport = require('passport');
 require('./auth/passportInit');
 const userModel = require('./model/user');
 const common = require('./common/index.js');
+const config = require('./config')('config');
 
 var serverSetup = require('./common/serverSetup');
 
 var app = express();
 
 /* APP SETUP */
+if (config.serveStatic) {
+  app.use(express.static('../client/dist'))
+}
 app.use(common.setHeaders);
 app.use(bodyParser.json({
   limit: '10mb'

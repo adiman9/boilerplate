@@ -2,6 +2,7 @@ useDb: true
 useSSL: false
 privateKey: ''
 sslCert: ''
+serveStatic: false
 session:
   secret: '**INSERT SESSION SECRET**'
   cookie:
