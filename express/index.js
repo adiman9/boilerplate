@@ -9,6 +9,7 @@ var serverSetup = require('./common/serverSetup');
 var app = express();
 
 /* APP SETUP */
+app.disable('x-powered-by');
 if (config.serveStatic) {
   app.use(express.static('../client/dist'))
 }
