@@ -1,7 +1,4 @@
 useDb: false
-useSSL: false
-privateKey: ''
-sslCert: ''
 serveStatic: false
 session:
   secret: 'octoturtlebeans'
