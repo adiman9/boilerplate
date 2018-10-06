@@ -15,7 +15,7 @@ passport.use(new FbStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
-    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'displayName', 'photos'],
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'displayName', 'picture.type(large)'],
   },
   async function(accessToken, refreshToken, profile, done) {
     // TODO error handling on all the different strategies Sat 30 Sep 13:48:52 2017
@@ -27,7 +27,7 @@ passport.use(new FbStrategy({
 /* ROUTES */
 
 // /auth/facebook
-router.get('/', passport.authenticate('facebook'));
+router.get('/', passport.authenticate('facebook', { scope: ['email']}));
 
 // /auth/facebook/callback
 router.get('/callback', authCallback('facebook'));
