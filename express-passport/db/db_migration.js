@@ -42,10 +42,10 @@ function applyMigrations(head, conn) {
     let i;
     try {
       for(i = head; i < SCHEMA_MIGRATIONS.length; i++){
-        migration = SCHEMA_MIGRATIONS[i];
+        const migration = SCHEMA_MIGRATIONS[i];
         await migration(conn);
+        await manualDbQuery(conn, 'UPDATE MigrationHead SET migration_id = ?', [i+1]);
       }
-      await manualDbQuery(conn, 'UPDATE MigrationHead SET migration_id = ?', [i]);
     } catch(err) {
       throw err;
     }
