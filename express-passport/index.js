@@ -7,6 +7,7 @@ require('./auth/passportInit');
 const userModel = require('./model/user');
 const common = require('./common/index.js');
 const config = require('./config')('config');
+const helmet = require('helmet');
 
 var serverSetup = require('./common/serverSetup');
 
@@ -14,6 +15,7 @@ var app = express();
 
 /* APP SETUP */
 app.disable('x-powered-by');
+app.use(helmet())
 if (config.serveStatic) {
   app.use(express.static('../client/dist'))
 }
