@@ -77,3 +77,7 @@ app.use((err, req, res, next) => {
 });
 
 serverSetup(app);
+
+process.on('unhandledRejection', function(reason, p){
+  logger.error('unhandledPromiseRejection:', p, "reason:", reason);
+});

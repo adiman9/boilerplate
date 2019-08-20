@@ -1,8 +1,9 @@
-var config = require('../config.js')('config')
+const config = require('../config.js')('config')
 const sg = require('sendgrid')(config.sendgrid.apikey);
 const helper = require('sendgrid').mail;
 const fs = require('fs');
 const handlebars = require('handlebars');
+const logger = require('../common/logger');
 
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
@@ -33,7 +34,7 @@ Object.keys(templates).forEach(key => {
 
   fs.readFile(obj.template, 'utf-8', (err, source) => {
     if(err) {
-      console.log('something went wrong reading file', obj.template, err);
+      logger.error('something went wrong reading file', obj.template, err);
       return;
     }
     obj.compiled = handlebars.compile(source);
@@ -62,8 +63,11 @@ function sendEmail(to, from, subject, message, template, template_data){
 
   return new Promise((resolve, reject) => {
     mailer.sendMail(email, (err, info) => {
-      if(err) return reject(err);
-      console.log('Message sent:', info);
+      if(err) {
+        logger.error(`error sending email: ${err}`);
+        return reject(err);
+      }
+      logger.info(`Message sent: ${JSON.stringify(info)}`);
       resolve(info.response)
     });
   });

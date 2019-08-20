@@ -44,10 +44,10 @@ async function migrate() {
 function applyMigrations(head, conn) {
   return new Promise(async (resolve, reject) => {
     if(head > SCHEMA_MIGRATIONS.length){
-      console.error('More migrations have been run than you have available. Ensure your code is up to date');
+      logger.error('More migrations have been run than you have available. Ensure your code is up to date');
     }
 
-    console.log('Applying', SCHEMA_MIGRATIONS.length - head, 'migrations');
+    logger.info('Applying', SCHEMA_MIGRATIONS.length - head, 'migrations');
 
     let i;
     try {

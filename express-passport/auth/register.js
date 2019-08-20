@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../model/user');
 const analyticsModel = require('../model/analytics');
+const logger = require('../../common/logger');
 
 // /auth/register
 router.post('/', async (req, res, next) => {
@@ -27,6 +28,7 @@ router.post('/', async (req, res, next) => {
   } else {
     let emailExists = await userModel.checkIfEmailExists(email);
     if (emailExists) {
+      logger.info(`can't create user with email ${email}. User already exists`);
       return res.json({
         errors: {
           email: 'Email exists already',
@@ -63,13 +65,16 @@ router.post('/', async (req, res, next) => {
       analyticsModel.addAnalyticsEvent(analyticsData)
         .then(suc => {
           if(suc)
-            console.log('added analytics event for register');
+            logger.info('added analytics event for register');
           else
-            console.log('failed to add analytics event for user register');
+            logger.info('failed to add analytics event for user register');
         });
 
       req.logIn(user, err => {
-        if(err) return next(err);
+        if(err) {
+          logger.error('Failed to log in user ${user.id}');
+          return next(err);
+        }
         // TODO probably redirect to some sort of profile / onboarding page Thu 20 Jul 2017 01:49:01 UTC
         res.json({success: true, name: user.email});
       });

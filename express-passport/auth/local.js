@@ -7,6 +7,7 @@ const userModel = require('../model/user');
 const {
   authCallback
 } = require('./utils');
+const logger = require('../../common/logger');
 
 // Setup passport Local strategy
 passport.use(new LocalStrategy({
@@ -19,6 +20,7 @@ passport.use(new LocalStrategy({
     let user = await userModel.getUserByEmail(email);
     if(!user) {
       // user not found
+      logger.info('User not found for email ${email}');
       return done(null, false);
     }
 
@@ -26,6 +28,7 @@ passport.use(new LocalStrategy({
 
     if(!valid_pass) {
       // wrong password
+      logger.info('invalid password for user ${user.id}');
       return done(null, false);
     }
 

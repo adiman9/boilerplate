@@ -1,6 +1,8 @@
 var passport = require('passport');
+const logger = require('../../common/logger');
 
 passport.serializeUser(function(user, done) {
+  logger.info(`serialising user ${user.id}`);
   var sessionUser = {
     id: user.id,
     name: user.name,
@@ -12,5 +14,6 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
+  logger.info(`deserialising user ${user.id}`);
   done(null, user)
 });

@@ -39,6 +39,7 @@ router.use('/github', require('./github'));
 router.use('/login', require('./local'));
 router.use('/register', require('./register'));
 router.use('/reset', require('./reset'));
+router.use('/changepassword', require('./changepassword'));
 
 
 // Return router

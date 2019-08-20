@@ -11,6 +11,7 @@ module.exports = {
 
 function isSignedIn(req, res, next) {
   let user = req.user;
+  logger.info('checking if user is signed in');
 
   if(
       user &&
@@ -24,6 +25,7 @@ function isSignedIn(req, res, next) {
     )
       return next();
 
+  logger.info('user not signed in');
   res.json({error: 'Please Sign In'});
 }
 
@@ -72,7 +74,7 @@ function authCallback(strategy, noRedirect) {
 
       if(anonUserId)
         userModel.addUserAlias(user.id, anonUserId)
-          .then(added => console.log('added alias for user', user.id, anonUserId));
+          .then(added => logger.info('added alias for user', user.id, anonUserId));
 
       const analyticsData = {
         location: ref || '',
@@ -88,9 +90,9 @@ function authCallback(strategy, noRedirect) {
       analyticsModel.addAnalyticsEvent(analyticsData)
         .then(suc => {
           if(suc)
-            console.log('added analytics event for', analyticsData.event);
+            logger.info('added analytics event for', analyticsData.event);
           else
-            console.log('failed to add analytics event for user', analyticsData.event);
+            logger.info('failed to add analytics event for user', analyticsData.event);
         });
 
       req.logIn(user, err => {
@@ -107,6 +109,7 @@ function authCallback(strategy, noRedirect) {
 }
 
 function ensureAuth(req, res, next) {
+  logger.info('ensuring current user is authenticated');
   if(req.isAuthenticated()) {
     logger.info('User is authenticated')
     return next(null);

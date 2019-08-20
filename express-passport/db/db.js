@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const config = require('../config/')('config');
+const logger = require('../common/logger');
 
 module.exports = {
   connWithNoDb,
