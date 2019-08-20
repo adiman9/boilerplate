@@ -8,8 +8,12 @@ const {
   authCallback
 } = require('./utils');
 
-// Setup passport Facebook strategy
-passport.use(new LocalStrategy(
+// Setup passport Local strategy
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    session: true
+  },
   async function(email, password, done) {
     // TODO pass better errors along Thu 20 Jul 2017 00:03:59 UTC
     let user = await userModel.getUserByEmail(email);
@@ -24,13 +28,21 @@ passport.use(new LocalStrategy(
       // wrong password
       return done(null, false);
     }
-    done(null, user);
+
+    done(null, {
+      ...user,
+      exists: true,
+    });
   }
 ));
 
 /* ROUTES */
 
-router.post('/', authCallback('local', true));
+router.post('/', (req, res, next) => {
+  req.session.referer = req.header('referer');
+
+  next();
+}, authCallback('local', true));
 
 // Return router
 module.exports = router;

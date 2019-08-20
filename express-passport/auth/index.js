@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   const user = req.user;
   res.json({loggedIn: user.provider !== 'anonymous'});
 });
+
 // Log user out
 router.delete('/', (req, res) => {
   if(req.user) {

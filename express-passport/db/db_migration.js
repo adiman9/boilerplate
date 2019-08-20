@@ -1,3 +1,13 @@
+const path = require('path');
+const dotenvconfig = require('dotenv').config({path: path.resolve(__dirname, '..', '.env')});
+const logger = require('../common/logger');
+logger.info('Migrating db...');
+
+if (dotenvconfig.error) {
+  logger.error(`failed to parse dotenv: ${dotenvconfig.error}`);
+  throw dotenvconfig.error
+}
+
 const {
   connWithNoDb,
   manualDbQuery,

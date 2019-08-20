@@ -1,13 +1,20 @@
 'use strict';
 const crypto = require('crypto');
+const path = require('path');
 
 module.exports = {
+  beauty,
   diffArrays,
   groupConcatStringToJson,
   hexStringToUUID,
   parseBase64,
   randomHexString,
-  waitForAllPromises
+  waitForAllPromises,
+  resolveHome,
+  shuffle,
+  getFunctionName,
+  isPOJO,
+  getAllFuncs,
 }
 
 // Polyfill for inserting strings into middle of existing strings
@@ -127,4 +134,79 @@ function groupConcatStringToJson(str) {
   });
 
   return items;
+}
+
+function resolveHome(filepath) {
+  if (filepath[0] === '~') {
+    return path.join(process.env.HOME, filepath.slice(1));
+  }
+  return filepath;
+}
+
+function beauty(data) {
+  console.log(JSON.stringify(data, null, 4));
+}
+
+function shuffle(a) {
+  const result = [...a];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const x = result[i];
+    result[i] = result[j];
+    result[j] = x;
+  }
+  return result;
+}
+
+function getFunctionName(fn) {
+  if (fn.name) {
+    return fn.name;
+  }
+  return (fn.toString().trim().match(/^function\s*([^\s(]+)/) || [])[1];
+}
+
+/*!
+ * Determines if `arg` is a plain old JavaScript object (POJO). Specifically,
+ * `arg` must be an object but not an instance of any special class, like String,
+ * ObjectId, etc.
+ *
+ * `Object.getPrototypeOf()` is part of ES5: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+ *
+ * @param {Object|Array|String|Function|RegExp|any} arg
+ * @api private
+ * @return {Boolean}
+ */
+
+function isPOJO(arg) {
+  if (arg == null || typeof arg !== 'object') {
+    return false;
+  }
+  const proto = Object.getPrototypeOf(arg);
+  // Prototype may be null if you used `Object.create(null)`
+  // Checking `proto`'s constructor is safe because `getPrototypeOf()`
+  // explicitly crosses the boundary from object data to object metadata
+  return !proto || proto.constructor.name === 'Object';
+}
+
+function getAllFuncs(obj) {
+  let props = [];
+  let tempObj = obj;
+
+  do {
+    props = props.concat(Object.getOwnPropertyNames(tempObj));
+    tempObj = Object.getPrototypeOf(tempObj);
+  } while (tempObj && tempObj !== Object.prototype);
+
+  return props
+    .sort()
+    .filter((e, i, arr) => {
+      const skip = ['arguments', 'caller', 'callee', 'constructor', 'bind', 'apply', 'call', 'toString'];
+      if (skip.includes(e)) {
+        return false;
+      }
+      if (e !== arr[i + 1] && typeof obj[e] === 'function') {
+        return true;
+      }
+      return false;
+    });
 }

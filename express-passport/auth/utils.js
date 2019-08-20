@@ -29,9 +29,44 @@ function isSignedIn(req, res, next) {
 
 function authCallback(strategy, noRedirect) {
   return (req, res, next) => {
-    passport.authenticate(strategy, (err, user, info) => {
+    passport.authenticate(strategy, async (err, profile, info) => {
+      const ref = req.session.referer.split('?')[0];
+      req.session.referer = '';
+      if(!profile) return res.json({error: 'Unkown Credentials'});
+
+      if (err === 'Email already in use') {
+        if (noRedirect) {
+          return res.json({ success: false, error: 'Email already in use' });
+        }
+        // TODO redirect to an actual error page Fri 10 Aug 22:44:49 2018
+        return res.redirect(ref + '/?error=true' || '');
+      }
+      // TODO redirect to an actual error page Fri 10 Aug 22:44:49 2018
       if(err) return res.json({error: 'Something went wrong. Please try again'});
+
+      if (!profile.exists) {
+        const inviteCode = req.session.inviteCode;
+        const inviteValid = await userModel.isInviteCodeValid(inviteCode);
+
+        if (!inviteValid) {
+          if (noRedirect) {
+            return res.json({ success: false, error: 'Invalid invite code' });
+          }
+          return res.redirect(ref + '/?error=invalid invite code' || '');
+        }
+      }
+      let user = await userModel.getOrCreateUserFromProfile(profile);
+
       if(!user) return res.json({error: 'Unkown Credentials'});
+
+      if (!profile.exists) {
+        let inviteUseSuccess = await userModel.useInviteCode(user.id, req.session.inviteCode);
+
+        if (!inviteUseSuccess) {
+          // TODO deal with errors Mon 27 Aug 22:39:44 2018
+        }
+        req.session.inviteCode = '';
+      }
 
       let anonUserId = req.session.anonUserId;
 
@@ -39,8 +74,8 @@ function authCallback(strategy, noRedirect) {
         userModel.addUserAlias(user.id, anonUserId)
           .then(added => console.log('added alias for user', user.id, anonUserId));
 
-      let analyticsData = {
-        location: req.header('referer') || '',
+      const analyticsData = {
+        location: ref || '',
         value: strategy,
         user_id: user.id
       }
@@ -65,16 +100,17 @@ function authCallback(strategy, noRedirect) {
         if(noRedirect)
           return res.json({success: true});
 
-        return res.redirect(req.header('referer') || '');
+        return res.redirect(ref || '');
       });
     })(req, res, next);
   }
 }
 
 function ensureAuth(req, res, next) {
-  if(req.isAuthenticated())
+  if(req.isAuthenticated()) {
     logger.info('User is authenticated')
     return next(null);
+  }
   logger.info('Not authenticated')
   res.redirect('/');
 }

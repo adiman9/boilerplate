@@ -1,5 +1,5 @@
-const sg = require('sendgrid')
-  ('**INSERT SENDGRID KEY**');
+var config = require('../config.js')('config')
+const sg = require('sendgrid')(config.sendgrid.apikey);
 const helper = require('sendgrid').mail;
 const fs = require('fs');
 const handlebars = require('handlebars');
@@ -11,12 +11,9 @@ module.exports = {
   sendEmail,
 }
 
-
-
-// TODO pull the key from config Fri 28 Jul 14:27:23 2017;
 const options = {
   auth: {
-    api_key: '**INSERT SENDGRID KEY**'
+    api_key: config.sendgrid.apikey
   }
 }
 

@@ -422,6 +422,40 @@ var makeUserAdmin = Model(
   }
 );
 
+var verifyProfile = Model(
+  async function(profile) {
+    const id = uuidParse.unparse(Buffer.from(uuidParse.parse(profile.id)));
+
+    let result = await dbQuery(`
+      SELECT
+        *
+      FROM
+        Users
+      WHERE
+        email = ?
+    `, [profile.emails[0].value]);
+
+    if (result && result[0]) {
+      const profileId = uuidParse.unparse(result[0].id);
+
+      if (profileId === id) {
+        return {
+          exists: true,
+          valid: true,
+        };
+      }
+      return {
+        exists: true,
+        valid: false,
+      };
+    }
+    return {
+      exists: false,
+      valid: true,
+    };
+  }
+);
+
 module.exports = {
   addUserAlias,
   createAnonymousUser,
@@ -432,5 +466,6 @@ module.exports = {
   getUserByEmail,
   getUserById,
   updateUserById,
+  verifyProfile,
 }
 

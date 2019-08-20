@@ -8,6 +8,7 @@ module.exports = {
   dbQuery,
   manualDbQuery,
   sql,
+  endPoolConn,
 }
 
 const dbConfig = config.db;
@@ -76,6 +77,13 @@ function sql(sql) {
       resolve(results);
     });
   }
+}
+
+function endPoolConn(sql, args) {
+  return new Promise(async (resolve, reject) => {
+    pool.end();
+    resolve();
+  });
 }
 
 function constructUpdateQuery(

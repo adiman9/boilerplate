@@ -6,7 +6,7 @@ const config = require('../config')('config');
 router.use('/v0', require('./api.v0'));
 
 router.get('/', (req, res) => {
-  res.render('hello');
+  res.render('API ROOT');
 });
 
 // Unknown route. 404

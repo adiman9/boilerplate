@@ -1,17 +1,30 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var exphbs = require('express-handlebars');
-var logger = require('./common/logger');
-var passport = require('passport');
+const dotenvconfig = require('dotenv').config();
+const logger = require('./common/logger');
+logger.info('Starting application');
+
+if (dotenvconfig.error) {
+  logger.error(`failed to parse dotenv: ${dotenvconfig.error}`);
+  throw dotenvconfig.error
+}
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
+const passport = require('passport');
+const config = require('./config')('config');
 require('./auth/passportInit');
 const userModel = require('./model/user');
 const common = require('./common/index.js');
-const config = require('./config')('config');
 const helmet = require('helmet');
+const responseTime = require('response-time')
 
-var serverSetup = require('./common/serverSetup');
+const serverSetup = require('./common/serverSetup');
 
-var app = express();
+const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(responseTime());
+}
 
 /* APP SETUP */
 app.disable('x-powered-by');

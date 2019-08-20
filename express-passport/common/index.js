@@ -2,6 +2,7 @@ exports.setHeaders = function (req, res, next) {
   // Website you wish to allow to connect
   const host = req.get('origin');
   if (
+    host &&
     host.indexOf('http://localhost') === 0
   ) {
     res.setHeader('Access-Control-Allow-Origin', host);

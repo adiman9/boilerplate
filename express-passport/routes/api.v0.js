@@ -5,7 +5,7 @@ var router = express.Router();
 router.use('/auth', require('../auth/index.js'));
 
 router.get('/', (req, res) => {
-  res.render('v0 API root endpoint');
+  res.send('v0 API root endpoint');
 });
 
 // Unknown route. 404
