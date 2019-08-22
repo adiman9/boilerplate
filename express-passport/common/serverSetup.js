@@ -1,5 +1,5 @@
 const http = require('http');
-let config = require('../config/')('config');
+let config = require('../config')('config');
 const logger = require('./logger');
 
 module.exports = (app) => {

@@ -13,7 +13,7 @@ const {
   manualDbQuery,
   sql
 } = require('./db.js');
-const config = require('../config/')('config');
+const config = require('../config')('config');
 
 async function migrate() {
   let conn = connWithNoDb();

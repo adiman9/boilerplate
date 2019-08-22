@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var config = require('../config/')('auth')
+var config = require('../config')('auth')
 const siteConfig = require('../config.js')('config');
 var userModel = require('../model/user');
 const {

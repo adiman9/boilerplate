@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var FbStrategy = require('passport-facebook').Strategy;
-var config = require('../config/')('auth')
+var config = require('../config')('auth')
 const siteConfig = require('../config.js')('config');
 var userModel = require('../model/user');
 // TODO add logging to files Sat 30 Sep 13:49:25 2017
