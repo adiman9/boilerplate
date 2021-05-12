@@ -16,7 +16,7 @@
     "js-yaml": "^3.9.1",
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
-    "nodemailer": "^4.6.4",
+    "nodemailer": "^6.4.16",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
